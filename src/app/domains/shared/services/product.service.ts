@@ -9,18 +9,17 @@ import { environment } from '@env/environment';
 export class ProductService {
   private http = inject(HttpClient);
   private url = environment.apiUrl;
-   
-   getProducts(params: { categoryId?: string, categorySlug?: string } ) {   
+  getProducts(params: { categoryId?: string; categorySlug?: string }) {
     const url = new URL(`${this.url}/api/v1/products/`);
-  
     if (params.categorySlug) {
-      url.searchParams.set('categorySlug', params.categorySlug);      
+      url.searchParams.set('categorySlug', params.categorySlug);
     }
 
-    return this.http.get<Product[]>(url.toString());  
+    return this.http.get<Product[]>(url.toString());
   }
 
- getOne(id: string) {
-   return this.http.get<Product>(`${this.url}/api/v1/products/${id}`);
- }
+  getOne(slug: string) {
+    const url = new URL(`${this.url}/api/v1/products/slug/${slug}`)
+    return this.http.get<Product>(url.toString());
+  }
 }

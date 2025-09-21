@@ -8,7 +8,7 @@
           [fill]="true"
           class="w-full object-cover object-center"
           [ngSrc]="cover()"
-          priority          
+          priority
         />
       </div>
     </div>
@@ -16,8 +16,8 @@
       <div class="grid grid-cols-3 gap-1">
         @for (img of products?.images; track img) {
           <img
-            width="80px"
-            height="80px"
+            width="80"
+            height="80"
             tabindex="0"
             role="button"
             (keydown.enter)="changeCover(img)"
@@ -27,13 +27,12 @@
             (click)="changeCover(img)"
             [class.border-red-400]="img === cover()"
             priority
-            />
+          />
         }
       </div>
     </div>
   </div>
   <div class="mt-5 w-full">
-    
     <h2 class="text-sm title-font text-gray-500 tracking-widest">
       {{ products?.category?.name | uppercase }}
     </h2>
@@ -43,7 +42,7 @@
     <p class="leading-relaxed">
       {{ products?.description }}
     </p>
-    
+
     <p class="title-font font-medium text-2xl text-gray-900 mt-5">
       {{ products?.price | currency: "$" : "symbol" : "1.0" }}
     </p>
