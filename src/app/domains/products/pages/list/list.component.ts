@@ -4,10 +4,9 @@ import {
   inject,
   signal,
   OnInit,
-  OnChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLinkWithHref } from '@angular/router';
+import { RouterLinkWithHref} from '@angular/router';
 import { ProductComponent } from '@products/components/product/product.component';
 
 import { Product } from '@shared/models/product.model';
@@ -21,34 +20,34 @@ import { Category } from '@shared/models/category.model';
   imports: [CommonModule, ProductComponent, RouterLinkWithHref],
   templateUrl: './list.component.html',
 })
-export default class ListComponent implements OnInit, OnChanges {
+export default class ListComponent implements OnInit {
   products = signal<Product[]>([]);
   categories = signal<Category[]>([]);
   private cartService = inject(CartService);
   private productService = inject(ProductService);
   private categoryService = inject(CategoryService);
-  @Input() category_id?: string;
-
+  @Input() categoryId?: string;
+  @Input() slug?: string;
+  
   ngOnInit() {
     this.getCategories();
   }
-
   ngOnChanges() {
-    this.getProducts();
+    this.getProductsBySlug();
   }
 
   addToCart(product: Product) {
     this.cartService.addToCart(product);
   }
 
-  private getProducts() {
-    this.productService.getProducts(this.category_id).subscribe({
+   private getProductsBySlug() {
+    this.productService.getProducts({ categorySlug: this.slug}).subscribe({
       next: (products) => {
         this.products.set(products);
       },
     });
   }
-
+ 
   private getCategories() {
     this.categoryService.getAll().subscribe({
       next: (data) => {
