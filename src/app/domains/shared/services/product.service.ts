@@ -9,6 +9,7 @@ import { environment } from '@env/environment';
 export class ProductService {
   private http = inject(HttpClient);
   private url = environment.apiUrl;
+
   getProducts(params: { categoryId?: string; categorySlug?: string }) {
     const url = new URL(`${this.url}/api/v1/products/`);
     if (params.categorySlug) {
@@ -19,7 +20,7 @@ export class ProductService {
   }
 
   getOne(slug: string) {
-    const url = new URL(`${this.url}/api/v1/products/slug/${slug}`)
+    const url = new URL(`${this.url}/api/v1/products/slug/${slug}`);
     return this.http.get<Product>(url.toString());
   }
 }

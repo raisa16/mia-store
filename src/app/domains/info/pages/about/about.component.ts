@@ -19,16 +19,16 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './about.component.html',
 })
 export default class AboutComponent {
-  duration = signal(1000);
-  message = signal('Hola');
+  $duration = signal(1000);
+  $message = signal('Hola');
 
   changeDuration(event: Event) {
     const input = event.target as HTMLInputElement;
-    this.duration.set(input.valueAsNumber);
+    this.$duration.set(input.valueAsNumber);
   }
 
   changeMessage(event: Event) {
     const input = event.target as HTMLInputElement;
-    this.message.set(input.value);
+    this.$message.set(input.value);
   }
 }
