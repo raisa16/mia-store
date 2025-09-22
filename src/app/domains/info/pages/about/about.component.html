@@ -9,8 +9,9 @@
   </p>
   <p class="text-base">Numero de clientes</p>
   <input [(ngModel)]="$duration" type="range" name="1" id="1000" />
+  <p>parent message: {{ $message() }}</p>
   @if (duration > 0) {
-    <app-counter [$duration]="duration" [$message]="$message()" />
+    <app-counter [$duration]="duration" [($message)]="$message" />
   }
   <div>
     <app-wave-audio audioUrl="assets/audio.mp3" />
