@@ -15,6 +15,7 @@ import { CartService } from '@shared/services/cart.service';
 import { ProductService } from '@shared/services/product.service';
 import { CategoryService } from '@shared/services/category.service';
 import { Category } from '@shared/models/category.model';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-list',
@@ -31,9 +32,14 @@ export default class ListComponent implements OnInit, OnChanges {
   readonly categoryId = input<string>();
   readonly slug = input<string>();
 
+  categoriesResource = rxResource({
+    loader: () => this.categoryService.getAll(),
+  });
+
   ngOnInit() {
     this.getCategories();
   }
+
   ngOnChanges() {
     this.getProductsBySlug();
   }
@@ -56,5 +62,13 @@ export default class ListComponent implements OnInit, OnChanges {
         this.categories.set(data);
       },
     });
+  }
+
+  resetCategories() {
+    this.categoriesResource.set([]);
+  }
+
+  reloadCategories() {
+    this.categoriesResource.reload();
   }
 }
