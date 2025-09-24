@@ -36,7 +36,7 @@ export default class ProductDetailComponent implements OnInit {
     const slug = this.slug();
     if (slug) {
       this.productService.getOne(slug).subscribe({
-        next: (product) => {
+        next: product => {
           this.$product.set(product);
         },
       });

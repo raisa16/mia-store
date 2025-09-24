@@ -10,8 +10,7 @@
             [fill]="true"
             class="w-full object-cover object-center"
             [ngSrc]="cover"
-            priority
-          />
+            priority />
         </div>
       </div>
       <div class="flex items-center justify-center mt-1">
@@ -28,8 +27,7 @@
               [ngSrc]="img"
               (click)="changeCover(img)"
               [class.border-red-400]="img === cover"
-              priority
-            />
+              priority />
           }
         </div>
       </div>
@@ -46,12 +44,11 @@
       </p>
 
       <p class="title-font font-medium text-2xl text-gray-900 mt-5">
-        {{ product?.price | currency: "$" : "symbol" : "1.0" }}
+        {{ product?.price | currency: '$' : 'symbol' : '1.0' }}
       </p>
       <button
         (click)="addToCart()"
-        class="flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded"
-      >
+        class="flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">
         Add To Cart
       </button>
     </div>
