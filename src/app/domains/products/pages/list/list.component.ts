@@ -1,4 +1,4 @@
-import { Component, inject, signal, input } from '@angular/core';
+import { Component, inject, signal, input, resource } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLinkWithHref } from '@angular/router';
 import { ProductComponent } from '@products/components/product/product.component';
@@ -25,8 +25,8 @@ export default class ListComponent {
   readonly categoryId = input<string>();
   readonly slug = input<string>();
 
-  categoriesResource = rxResource({
-    loader: () => this.categoryService.getAll(),
+  categoriesResource = resource({
+    loader: () => this.categoryService.getAllCategories(),
   });
 
   productsResource = rxResource({
