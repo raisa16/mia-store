@@ -8,6 +8,7 @@ import {
   effect,
   computed,
   model,
+  afterNextRender,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -21,7 +22,7 @@ export class CounterComponent implements OnInit, AfterViewInit, OnDestroy {
   $doubleDuration = computed(() => this.$duration() * 2);
   $message = model.required<string>();
   $counter = signal(0);
-  counterRef: number | undefined;
+  counterRef: number | null = null;
 
   constructor() {
     // NO ASYNC
@@ -34,6 +35,13 @@ export class CounterComponent implements OnInit, AfterViewInit, OnDestroy {
       this.$message();
       this.doSomethingTwo();
     });
+
+    afterNextRender(() => {
+      this.counterRef = window.setInterval(() => {
+        console.log('run interval');
+        this.$counter.update(statePrev => statePrev + 1);
+      }, 1000);
+    });
   }
 
   ngOnInit() {
@@ -44,10 +52,6 @@ export class CounterComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log('-'.repeat(10));
     console.log('duration =>', this.$duration());
     console.log('message =>', this.$message());
-    this.counterRef = window.setInterval(() => {
-      console.log('run interval');
-      this.$counter.update(statePrev => statePrev + 1);
-    }, 1000);
   }
 
   ngAfterViewInit() {
@@ -60,7 +64,9 @@ export class CounterComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     console.log('ngOnDestroy');
     console.log('-'.repeat(10));
-    window.clearInterval(this.counterRef);
+    if (this.counterRef) {
+      window.clearInterval(this.counterRef);
+    }
   }
 
   doSomethingTwo() {
