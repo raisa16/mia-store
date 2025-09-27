@@ -23,4 +23,8 @@ export class ProductService {
     const url = new URL(`${this.url}/api/v1/products/slug/${slug}`);
     return this.http.get<Product>(url.toString());
   }
+  getRelatedProducts(slug: string) {
+    const url = new URL(`${this.url}/api/v1/products/slug/${slug}/related`);
+    return this.http.get<Product[]>(url.toString());
+  }
 }
