@@ -8,7 +8,7 @@ import { environment } from '@env/environment';
 })
 export class ProductService {
   private http = inject(HttpClient);
-  private url = environment.apiUrl;
+  private url = environment.domains;
 
   getProducts(params: { categoryId?: string; categorySlug?: string }) {
     const url = new URL(`${this.url}/api/v1/products/`);
