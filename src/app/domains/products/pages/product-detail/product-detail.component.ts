@@ -41,12 +41,14 @@ export default class ProductDetailComponent {
   constructor() {
     effect(() => {
       const product = this.productRs.value();
-      this.metaTagsService.updateMetaTags({
-        title: product?.title,
-        description: product?.description,
-        image: product?.images[0],
-        url: environment.domains + '/products/' + product?.slug,
-      });
+      if (product) {
+        this.metaTagsService.updateMetaTags({
+          title: product.title,
+          description: product.description,
+          image: product.images[0],
+          url: environment.domains + '/api/v1/products/slug/' + product.slug,
+        });
+      }
     });
   }
 

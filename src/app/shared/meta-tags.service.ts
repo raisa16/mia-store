@@ -37,10 +37,10 @@ export class MetaTagsService {
     return [
       { name: 'title', content: metaData.title },
       { name: 'description', content: metaData.description },
-      { name: 'og:title', content: metaData.title },
-      { name: 'og:description', content: metaData.description },
-      { name: 'og:url', content: metaData.url },
-      { name: 'og:image', content: metaData.image },
+      { property: 'og:title', content: metaData.title },
+      { property: 'og:description', content: metaData.description },
+      { property: 'og:image', content: metaData.image },
+      { property: 'og:url', content: metaData.url },
     ];
   }
 }
