@@ -45,7 +45,7 @@ export default class ProductDetailComponent {
         title: product?.title,
         description: product?.description,
         image: product?.images[0],
-        url: environment.apiUrl + '/products/' + product?.slug,
+        url: environment.domains + '/products/' + product?.slug,
       });
     });
   }

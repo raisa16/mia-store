@@ -13,7 +13,7 @@ const defaultMetaData: pageMetaData = {
   title: 'Default Title',
   description: 'Default description for the application.',
   image: 'https://www.example.com/default-image.jpg',
-  url: environment.apiUrl,
+  url: environment.domains,
 };
 
 @Injectable({
