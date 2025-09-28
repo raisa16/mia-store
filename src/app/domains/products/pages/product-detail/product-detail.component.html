@@ -52,6 +52,11 @@
         Add To Cart
       </button>
     </div>
+    <div class="mt-80"></div>
   </div>
-  <app-related [$slug]="product.slug"></app-related>
+  @defer (on viewport) {
+    <app-related [$slug]="product.slug"></app-related>
+  } @placeholder {
+    <p>Loading...</p>
+  }
 }
